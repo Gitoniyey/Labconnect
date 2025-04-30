@@ -1,0 +1,267 @@
+/* General Styles with Animation */
+body {
+    background: url("ganda.nito.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1s ease-out;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Enhanced Container Styling */
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    border-left: 4px solid #0b0eb3;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animated Title Styling */
+.title, .contact-title {
+    font-size: 30px;
+    background: linear-gradient(45deg, #0b0eb3, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+@keyframes titleReveal {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animated Section Title */
+.section-title {
+    color: red;
+    text-align: center;
+    font-size: 22px;
+    margin-top: 20px;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Line Styling */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FF5722, transparent);
+    margin: 40px 0;
+    animation: gradientFlow 3s linear infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Enhanced Back Button */
+.back-btn {
+    display: inline-block;
+    background: linear-gradient(45deg, #0b0eb3, #ff5722);
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(230, 74, 25, 0.3);
+}
+
+.back-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: width 0.6s ease, height 0.6s ease;
+    transform: translate(-50%, -50%);
+}
+
+/* Button Container */
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn:active::after {
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+}
+
+ul, ol {
+    text-align: left;
+    margin: 0 auto;
+    display: table;
+}
+
+ul li, ol li {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+/* Alignments */
+.centered-content {
+    text-align: center;
+}
+
+.left-align {
+    text-align: left;
+}
+
+@keyframes fadeInRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Hover Effects for List Items */
+ul li:hover, ol li:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border-left-color: #ff5722;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Link Animations */
+a {
+    color: #FF5722;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #FF5722;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Contact Box Animation */
+.contact-box {
+    margin-top: 40px;
+    padding: 20px;
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    transform: translateX(-20px);
+    opacity: 0;
+    animation: slideIn 0.8s ease forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Container Border Animation */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FF5722, transparent, #FF5722);
+    animation: borderFlow 3s linear infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes borderFlow {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        width: 95%;
+    }
+
+    @keyframes slideUp {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+}
+
+/* Title Styling */
+.title, .contact-title {
+    color: blue;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+

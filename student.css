@@ -1,0 +1,643 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3;
+    padding: 10px 20px;
+    color: white;
+}
+
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+}
+
+
+nav a, .login-btn {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+
+nav .login-btn {
+    background-color: #ffcc00;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Notification Popup */
+.notification-container {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+
+.notification-container.active {
+    display: block;
+}
+
+
+.notification-container h3 {
+    text-align: left;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+
+.notification-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+
+.notification-container ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+
+.notification-container ul li:last-child {
+    border-bottom: none;
+}
+
+
+/* Form Layout */
+.request-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    width: 130%;
+    max-width: 925px;
+}
+
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0056b3;
+}
+
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+label {
+    font-weight: bold;
+}
+
+
+input, select {
+    width: 35%;
+    padding: 8px;
+    margin: 10px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
+.item-list, .confirmed-items {
+    width: 48%;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+.item-list label, .confirmed-items div {
+    display: flex;
+    align-items: left;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+
+.item-list input[type="checkbox"] {
+    margin-right: 50px;
+   
+}
+
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100px;
+}
+
+
+.quantity-controls button {
+    padding: 5px 10px;
+    border: none;
+    background: #0056b3;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.quantity-controls button:hover {
+    background: #003d82;
+}
+
+
+h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+
+.send-approval {
+    display: block;
+    width: 100%;
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.send-approval:hover {
+    background: #218838;
+}
+
+
+.send-approval:active {
+    background: #1e7e34;
+}
+.notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+
+.notification.show {
+    display: block;
+    animation: fadeOut 3s forwards;
+}
+
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { opacity: 0; }
+}
+/* Notification Bell */
+.notification-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Notification Count */
+.notification-count {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    font-size: 14px;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+
+#notification-panel {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+}
+
+
+#notification-panel h4 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #0056b3;
+}
+
+
+#notification-list {
+    list-style: none;
+    padding: 0;
+}
+
+
+#notification-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+
+/* Profile Icon */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ffcc00;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #000000;
+    position: relative;
+}
+
+
+/* Profile Dropdown */
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background: rgb(0, 0, 0);
+    width: 200px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 1000;
+}
+
+
+.profile-dropdown.active {
+    display: block;
+}
+
+
+.profile-dropdown ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.profile-dropdown ul li {
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+    cursor: pointer;
+}
+
+
+.profile-dropdown ul li:last-child {
+    border-bottom: none;
+}
+
+
+.profile-dropdown ul li:hover {
+    background: #ffffff;
+}
+
+
+/* Navigation Menu */
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+
+.nav-menu li {
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.nav-menu li:hover {
+    background: #0056b3;
+}
+/* Default Light Mode */
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #333;
+    --header-bg: #0056b3;
+    --nav-bg: #007bff;
+    --btn-bg: #ffcc00;
+}
+
+
+/* Dark Mode */
+.dark-mode {
+    --bg-color: #000000;
+    --text-color: #f4f4f4;
+    --header-bg: #333;
+    --nav-bg: #444;
+    --btn-bg: #ff9800;
+}
+
+
+/* Apply Variables */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: 0.3s ease-in-out;
+}
+
+
+header {
+    background-color: var(--header-bg);
+}
+
+
+.nav-menu li {
+    background: var(--nav-bg);
+}
+
+
+.nav-menu li:hover {
+    background: #0056b3;
+}
+
+
+button#theme-toggle {
+    padding: 5px 10px;
+    background: var(--btn-bg);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+
+button#theme-toggle:hover {
+    background: #ffb300;
+}
+/* Footer Styles */
+.footer {
+    background-color: #ffb300; /* Dark blue background */
+    color: #000000;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 14px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+/* Social Icons */
+.social-icons {
+    margin-bottom: 10px;
+}
+
+
+.social-icons a {
+    display: inline-block;
+    margin: 0 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+
+.social-icons a:hover {
+    transform: scale(1.1);
+}
+
+
+/* Social Icon Images */
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    filter: none; /* Makes icons white */
+}
+
+
+/* Footer Navigation Links */
+.footer nav {
+    margin-top: 10px;
+}
+
+
+.footer nav a {
+    color: #000000;
+    text-decoration: none;
+    margin: 0 8px;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+
+.footer nav a:hover {
+    color: #15085c; /* Highlight color when hovered */
+}
+
+
+/* Responsive Footer */
+@media (max-width: 600px) {
+    .footer {
+        font-size: 12px;
+    }
+
+
+    .social-icons img {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 150px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1000;
+    color: #000000;
+}
+
+.notification-dropdown.active {
+    display: block;
+}
+
+.notification-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+    color: #000000;
+}
+
+#notification-btn {
+    position: relative;
+}
+
+.notification-list {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification-item.unread {
+    background-color: #f0f7ff;
+}
+
+.notification-message {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: black
+}
+
+.notification-time {
+    font-size: 12px;
+    color: #555555;
+}
+
+.notification-actions button {
+    background: none;
+    border: none;
+    color: #0066cc;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+.empty-notification {
+    padding: 20px;
+    text-align: center;
+    color: #555555;
+}
+
+#mark-all-read {
+    background: none;
+    border: none;
+    color: #0066cc;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+
+}

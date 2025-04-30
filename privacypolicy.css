@@ -1,0 +1,158 @@
+/* General Styles with Animation */
+body {
+    background: url("ganda.nito.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    animation: fadeIn 1s ease-out;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* White Glass Container Effect */
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    border-left: 4px solid #0b0eb3;
+    backdrop-filter: blur(10px);
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+}
+
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Centered Specific Titles */
+.title, h2 {
+    font-size: 30px;
+    background: linear-gradient(45deg, #0b0eb3, #ff5722);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.last-updated {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+}
+
+h3 {
+    text-align: center;
+}
+
+/* Enhanced Line Styling */
+hr {
+    border: none;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #FF5722, transparent);
+    margin: 40px 0;
+    animation: gradientFlow 3s linear infinite;
+    background-size: 200% 100%;
+}
+
+@keyframes gradientFlow {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Gradient Rectangle Button Similar to Image */
+.back-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #0b0eb3, #ff5722);
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: auto;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(230, 74, 25, 0.3);
+}
+
+/* Button Container */
+.btn-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+ul, ol {
+    margin: 0 auto;
+    display: table;
+}
+
+ul li, ol li {
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+    border-left: 3px solid transparent;
+    text-align: left;
+}
+
+/* Hover Effects for List Items */
+ul li:hover, ol li:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border-left-color: #ff5722;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhanced Link Animations */
+a {
+    color: #FF5722;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #FF5722;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+/* Responsive Animations */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        width: 95%;
+    }
+}
+

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LabConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='labconnect.css') }}">
+    <script src="labconnect.js" defer></script>
+
+    <header>
+        <div class="logo">
+            <img src="logolabconnect.png" alt="Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="#Home">Home</a></li>
+            <li><a href="#About">About Us</a></li>
+            <li><a href="#Contact">Contact Us</a></li>
+        </ul>
+    </header>
+    
+    <body>
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Efficiency in equipment borrowing leads to productivity in learning</h1>
+                <p>Our School Laboratory Management System is designed to make borrowing equipment seamless, systematic, and organized.</p>
+                <div class="buttons">
+                    <a href="#" class="btn" onclick="openModal('signup')">Get Started</a>
+                    <a href="login.html" class="btn" onclick="openModal('signin')">Sign In</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- MODAL -->
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+        
+                <!-- SIGN UP FORM -->
+                <div id="signupForm">
+                    <h2>Sign Up</h2>
+                    <form>
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter username" required>
+        
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Enter email" required>
+        
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+        
+                        <button type="submit">Sign Up</button>
+                        
+                        
+                    
+                        
+                    </form>
+                    <p>Already have an account? <a href="#" onclick="toggleForms('signin')">Sign In</a></p>
+                    <a href="Labconnect.html" class="btn">Back to Home</a>
+                </div>
+        
+                <!-- SIGN IN FORM -->
+                <div id="signinForm" style="display: none;">
+                    <h2>Sign In</h2>
+                    <form>
+                        <label for="emailLogin">Email</label>
+                        <input type="email" id="emailLogin" placeholder="Enter email" required>
+        
+                        <label for="passwordLogin">Password</label>
+                        <input type="password" id="passwordLogin" placeholder="Enter password" required>
+        
+                        <button type="submit">Sign In</button>
+
+                    </form>
+                    <p>Don't have an account? <a href="#" onclick="toggleForms('signup')">Sign Up</a></p>
+                    <a href="Labconnect.html" class="btn">Back to Home</a>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <!--COURSES LIST-->
+    <section class="courses">
+        <h2>COURSES WE ASSIST</h2>
+        <div class="course-list">
+            <div class="course">
+                <img src="engineering.png" alt="Engineering">
+                <p>Computer Engineering</p>
+            </div>
+            <div class="course">
+                <img src="it.png" alt="Information Technology">
+                <p>Information Technology</p>
+            </div>
+            <div class="course">
+                <img src="medical.png" alt="Medical Courses">
+                <p>Medical & Science Courses</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="stat">
+            <h3>200+</h3>
+            <p>Successful Transaction Equipment</p>
+        </div>
+        <div class="stat">
+            <h3>150+</h3>
+            <p>Lab Assistance Provided</p>
+        </div>
+        <div class="stat">
+            <h3>95%</h3>
+            <p>Faster Equipment Request Processing</p>
+        </div>
+    </section>
+
+    <!--ABOUT US SECTION-->
+    <section id="About" class="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>About Us </h2>
+                <p>LabConnect is a cutting-edge laboratory management system designed to streamline equipment borrowing and ensure a smooth experience for students and faculty. Our goal is to make laboratory resources accessible, efficient, and well-organized.</p>
+                <p>With LabConnect, you can easily request and track lab equipment, reducing downtime and improving learning experiences.</p>
+                <a href="learnmore.html" class="btn">Learn More</a>
+
+            </div>
+            <div class="about-image">
+                <img src="about-lab.jpg" alt="Laboratory Image">
+            </div>
+        </div>
+    </section>
+    
+    <section class="team-section">
+        <h2>Meet Our Team</h2>
+        <p>The system is being developed through the collaborative efforts of:</p>
+        
+        <div class="team-container">
+            <div class="team-member">
+                <img src="Ramirez.jpg" alt="Engr. Ma. Khrisha Shane Ramirez">
+                <p>Engr. Ma. Khrisha Shane Ramirez</p>
+            </div>
+            <div class="team-member">
+                <img src="Jurada.jpg" alt="Engr. Sarra May Jurada">
+                <p>Engr. Sarra May Jurada</p>
+            </div>
+            <div class="team-member">
+                <img src="ison.jpg" alt="Engr. Antonette Ison">
+                <p>Engr. Antonette Ison</p>
+            </div>
+            <div class="team-member">
+                <img src="Ignacio.jpg" alt="Engr. Antonette Jean Ignacio">
+                <p>Engr. Antonette Jean Ignacio</p>
+            </div>
+        </div>
+    </section>
+    
+
+    
+    <section class="how-to-use">
+        <div class="text-container">
+            <h2>How to Use the Website?</h2>
+            <div class="info-box"><strong>Sign Up or Log In</strong> – Access your Student, Teacher, or Admin Portal.</div>
+            <div class="info-box"><strong>Reserve a Lab</strong> – Select a date and time that fits your schedule.</div>
+            <div class="info-box"><strong>Request Equipment</strong> – Need lab tools? Send a request online!</div>
+            <div class="info-box"><strong>Manage Your Sessions</strong> – View upcoming and past lab sessions.</div>
+            <div class="info-box"><strong>Stay Updated</strong> – Receive notifications for lab schedules, approvals, and announcements.</div>
+        </div>
+        <div class="image-container">
+            <img src="laboratory.jpg" alt="Lab Management Illustration">
+        </div>
+
+    </section>
+    
+    
+    <section class="contact" id="Contact">
+        <h2>Contact Us</h2>
+        <p>Have any questions? Feel free to reach out to us!</p>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <p><strong>Email:</strong> supportlabconnect@jru.edu</p>
+                <p><strong>Phone:</strong> +63 912 345 6789</p>
+                <p><strong>Address:</strong> 80 Shaw Blvd, Mandaluyong, 1552 Metro Manila</p>
+            </div>
+
+    <!-- Google Map -->
+<div class="contact-map" style="width: 80%; max-width: 500px; margin: 20px auto; border-radius: 10px; overflow: hidden; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); box-sizing:border-box;">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.114928162995!2d121.0285593!3d14.5925264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c9cdec00e801%3A0x90ebd52dbd050466!2sJos%C3%A9%20Rizal%20University!5e0!3m2!1sen!2sph!4v1743050588455!5m2!1sen!2sph"
+         width="110%" height="350" style="border:5; display: block; min-height: 350px;" allowfullscreen="" loading="lazy">
+    </iframe>
+</div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" id="name" name="name" placeholder="Full Name:" required>
+                <input type="text" id="id number" name="id number" placeholder="Student ID#:" required>
+                <input type="email" id="email" name="email" placeholder="Email Address:" required>
+                <input type="text" id="course" name="course" placeholder="Course:" required>
+                <input type="text" id="section" name="section" placeholder="Section:" required>
+                <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+
+
+   </div>
+        <p id="form-message" class="form-message"></p>
+    
+
+   
+        
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
+        </div>
+        
+        <p>© 2025 Jose Rizal University. All Rights Reserved.</p>
+        <nav>
+            <a href="terms-of-service.html">Terms of Use</a> |
+            <a href="privacy-policy.html">Privacy Policy</a> 
+        </nav>
+    </footer>
+    
+    <script src="labconnect.js"></script>
+</body>
+</html>
