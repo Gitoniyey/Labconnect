@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Portal</title>
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='admin.css') }}">
+    <script src="{{ url_for('static', filename='admin.js') }}"></script>
+
 </head>
 <body>
     <header>
@@ -81,6 +83,5 @@
         </div>
     </div>
 </div>
-    <script src="admin.js"></script>
 </body>
 </html>

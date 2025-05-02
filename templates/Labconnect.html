@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LabConnect</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='labconnect.css') }}">
-    <script src="labconnect.js" defer></script>
+    <script src="{{ url_for('static', filename='labconnect.js') }}"></script>
 
     <header>
         <div class="logo">
-            <img src="logolabconnect.png" alt="Logo">
+            <img src="{{ url_for('static', filename='logolabconnect.png') }}" alt="Image">
+
         </div>
         <ul class="nav-links">
             <li><a href="#Home">Home</a></li>
