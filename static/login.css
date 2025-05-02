@@ -84,14 +84,16 @@ input:focus {
 }
 
 .login-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
+    width: 100%;
+    padding: 12px;
+    background: #ff6b6b;
     color: white;
-    text-decoration: none;
-    border-radius: 4px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
-
 
 .login-btn:hover {
     background: #ff8e8e;
@@ -126,12 +128,3 @@ input:focus {
     }
 }
 
-
-.login-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-}
