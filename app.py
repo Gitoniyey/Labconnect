@@ -39,20 +39,15 @@ def update_inventory():
 # === Student Dashboard ===
 @app.route("/student/dashboard")
 def student_dashboard():
-<<<<<<< HEAD
-    student_id = "example_student_id"
+    student_id = "example_student_id"  # Replace with real student ID if using login/session
     student_requests = supabase.table("student_requests").select("*").eq("student_id", student_id).execute().data
-=======
-    request_id = "example_request_id"  # Fetch dynamically based on session or login system
-    student_requests = supabase.table("student_requests").select("*").eq("request_id", request_id).execute().data
->>>>>>> 16aa41b1c6530a8c9aba3970d98a37524290014e
     return render_template("student_dashboard.html", student_requests=student_requests)
 
 @app.route("/student/submit-request", methods=["POST"])
 def submit_request():
     subject = request.form.get("subject")
     description = request.form.get("description")
-    student_id = "example_student_id"
+    student_id = "example_student_id"  # Replace with real student ID
     supabase.table("student_requests").insert({
         "subject": subject,
         "description": description,
@@ -64,7 +59,7 @@ def submit_request():
 # === Professor Dashboard ===
 @app.route("/professor/dashboard")
 def professor_dashboard():
-    professor_id = "example_professor_id"
+    professor_id = "example_professor_id"  # Replace with real professor ID
     student_requests = supabase.table("student_requests").select("*").eq("professor_id", professor_id).execute().data
     return render_template("professor_dashboard.html", student_requests=student_requests)
 
