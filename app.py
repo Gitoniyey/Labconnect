@@ -46,8 +46,8 @@ def update_inventory():
 # Student Dashboard Route
 @app.route("/student")
 def student_dashboard():
-    student_id = "example_student_id"  # Fetch dynamically based on session or login system
-    student_requests = supabase.table("student_requests").select("*").eq("student_id", student_id).execute().data
+    request_id = "example_request_id"  # Fetch dynamically based on session or login system
+    student_requests = supabase.table("student_requests").select("*").eq("request_id", request_id).execute().data
     return render_template("student_dashboard.html", student_requests=student_requests)
 
 # Submit Student Request Route
