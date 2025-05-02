@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms of Service</title>
-    <link rel="stylesheet" href="termsofservice.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='termsofservice.css') }}">
 </head>
 <body>
     <section class="container">
@@ -66,7 +66,7 @@
         </div>
 
         <div class="btn-container">
-            <a href="LabConnect.html" class="back-btn">Back to Home</a>
+            <a href= "{{ url_for('labconnect') }}" class="btn">Back to Home</a>
         </div>
     </section>
 </body>

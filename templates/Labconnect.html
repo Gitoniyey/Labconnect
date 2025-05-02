@@ -26,7 +26,7 @@
                 <p>Our School Laboratory Management System is designed to make borrowing equipment seamless, systematic, and organized.</p>
                 <div class="buttons">
                     <a href="#" class="btn" onclick="openModal('signup')">Get Started</a>
-                    <a href="login.html" class="btn" onclick="openModal('signin')">Sign In</a>
+                    <a href="{{ url_for('login') }}" class="btn" onclick="openModal('signin')">Sign In</a>
                 </div>
             </div>
         </section>
@@ -56,7 +56,7 @@
                         
                     </form>
                     <p>Already have an account? <a href="#" onclick="toggleForms('signin')">Sign In</a></p>
-                    <a href="Labconnect.html" class="btn">Back to Home</a>
+                    <a href="{{ url_for('labconnect') }}" class="btn">Back to Home</a>
                 </div>
         
                 <!-- SIGN IN FORM -->
@@ -73,7 +73,7 @@
 
                     </form>
                     <p>Don't have an account? <a href="#" onclick="toggleForms('signup')">Sign Up</a></p>
-                    <a href="Labconnect.html" class="btn">Back to Home</a>
+                    <a href= "{{ url_for('labconnect') }}" class="btn">Back to Home</a>
                 </div>
             </div>
         </div>
@@ -121,7 +121,8 @@
                 <h2>About Us </h2>
                 <p>LabConnect is a cutting-edge laboratory management system designed to streamline equipment borrowing and ensure a smooth experience for students and faculty. Our goal is to make laboratory resources accessible, efficient, and well-organized.</p>
                 <p>With LabConnect, you can easily request and track lab equipment, reducing downtime and improving learning experiences.</p>
-                <a href="learnmore.html" class="btn">Learn More</a>
+                <a href= "{{ url_for('learnmore') }}" class="btn">Learn More</a>
+                
 
             </div>
             <div class="about-image">
@@ -218,11 +219,12 @@
         
         <p>© 2025 Jose Rizal University. All Rights Reserved.</p>
         <nav>
-            <a href="terms-of-service.html">Terms of Use</a> |
-            <a href="privacy-policy.html">Privacy Policy</a> 
+           
+            <a href= "{{ url_for('terms_of_service') }}" class="btn">Terms of Use</a>
+            <a href= "{{ url_for('privacy_policy') }}" class="btn">Privacy Policy</a>
         </nav>
     </footer>
     
-    <script src="labconnect.js"></script>
+    <script src="{{ url_for('static', filename='labconnect.js') }}"></script>
 </body>
 </html>

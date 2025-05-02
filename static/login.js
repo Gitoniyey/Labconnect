@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
             type: currentUserType,
             name: username // You can modify this based on your user data
         };
+
+        <button type="button" class="login-btn" onclick="window.location.href='{{ url_for('login') }}'">Login</button>
+
         localStorage.setItem('currentUser', JSON.stringify(userData));
 
         // Redirect based on user type

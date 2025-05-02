@@ -86,6 +86,10 @@ def decline_request(request_id):
     return redirect(url_for("professor_dashboard"))
 
 # Routes for Static Pages
+@app.route("/")
+def labconnect():
+    return render_template("Labconnect.html")
+
 @app.route("/learnmore")
 def learnmore():
     return render_template("learnmore.html")

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LabConnect - Professor Dashboard</title>
-    <link rel="stylesheet" href="professor.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='professor.css') }}">
 </head>
 <body>
     <div class="main-container">
@@ -149,6 +149,6 @@
 
 
 
-    <script src="professor.js"></script>
+    <script src="{{ url_for('static', filename='professor.js') }}"></script>
 </body>
 </html>
