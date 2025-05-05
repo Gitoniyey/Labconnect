@@ -15,38 +15,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle login form submission
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
 
-        // Simple validation
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+
         if (!username || !password) {
-            alert('Please fill in all fields');
+            alert('Username and password are required.');
             return;
         }
 
-        // Store user data in localStorage
         const userData = {
             username: username,
-            type: currentUserType,
-            name: username // You can modify this based on your user data
+            type: currentUserType
         };
-
-        <button type="button" class="login-btn" onclick="window.location.href='{{ url_for('login') }}'">Login</button>
-
         localStorage.setItem('currentUser', JSON.stringify(userData));
 
-        // Redirect based on user type
-        switch(currentUserType) {
-            case 'student':
-                window.location.href = 'Student.html';
-                break;
-            case 'professor':
-                window.location.href = 'professor.html';
-                break;
-            case 'admin':
-                window.location.href = 'admin.html';
-                break;
-        }
+        // Dynamic redirection via Jinja (rendered in HTML)
+        window.location.href = window.routes[currentUserType];
+
     });
 });

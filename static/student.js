@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // localStorage.removeItem("userSession");
             
             // Redirect to sign-in page
-            window.location.href = "login.html";
+            window.location.href = "login.html"; 
         });
     }
 

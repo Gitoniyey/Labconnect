@@ -8,7 +8,7 @@
 
 
 body {
-    background-color: #f4f4f4;
+    background: url('ganda.nito.jpg') no-repeat center center fixed;
     padding: 20px;
 }
 
@@ -17,7 +17,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0056b3;
+    background: transparent; /* Make the header background transparent */
     padding: 10px 20px;
     color: white;
 }
@@ -104,7 +104,7 @@ nav .login-btn {
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #0056b3;
+    color: #ff5722;
 }
 
 
@@ -141,7 +141,8 @@ input, select {
 
 .item-list, .confirmed-items {
     width: 48%;
-    background: white;
+    background-color: #ffb300; /* The darker yellow/amber color you specified */
+    color: black; /* Make text readable on the amber background */
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
@@ -153,12 +154,14 @@ input, select {
     align-items: left;
     justify-content: space-between;
     padding: 5px 0;
+    color: black; /* Ensure text inside these elements is also black */
+
 }
 
 
 .item-list input[type="checkbox"] {
     margin-right: 50px;
-   
+
 }
 
 
@@ -174,29 +177,29 @@ input, select {
 .quantity-controls button {
     padding: 5px 10px;
     border: none;
-    background: #0056b3;
-    color: white;
+    background: #e69900; /* A slightly darker shade for button */
+    color: black;
     cursor: pointer;
     border-radius: 5px;
 }
 
 
 .quantity-controls button:hover {
-    background: #003d82;
+    background: #e69900;
 }
 
 
 h3 {
     text-align: center;
     margin-bottom: 10px;
-    color: #333;
+    color: black; /* Make the heading text black */
 }
 
 
 .send-approval {
     display: block;
     width: 100%;
-    background: #28a745;
+    background: linear-gradient(to right, #4c00ff, #ff5722);
     color: white;
     padding: 10px;
     border: none;
@@ -208,7 +211,7 @@ h3 {
 
 
 .send-approval:hover {
-    background: #218838;
+    background: #ff5722;
 }
 
 
@@ -259,7 +262,7 @@ h3 {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: red;
+    background: re;
     color: white;
     font-size: 14px;
     padding: 3px 6px;
@@ -398,7 +401,7 @@ h3 {
 :root {
     --bg-color: #f4f4f4;
     --text-color: #333;
-    --header-bg: #0056b3;
+    --header-bg: transparent; /* Set default header background to transparent */
     --nav-bg: #007bff;
     --btn-bg: #ffcc00;
 }
@@ -408,7 +411,7 @@ h3 {
 .dark-mode {
     --bg-color: #000000;
     --text-color: #f4f4f4;
-    --header-bg: #333;
+    --header-bg: transparent; /* Set dark mode header background to transparent */
     --nav-bg: #444;
     --btn-bg: #ff9800;
 }
@@ -423,7 +426,7 @@ body {
 
 
 header {
-    background-color: var(--header-bg);
+    background-color: var(--header-bg); /* Use the variable for header background */
 }
 
 
@@ -547,7 +550,7 @@ button#theme-toggle:hover {
     position: absolute;
     top: -5px;
     right: -5px;
-    background-color: red;
+    background-color: #0056b3;
     color: white;
     border-radius: 50%;
     width: 18px;
@@ -640,4 +643,93 @@ button#theme-toggle:hover {
     font-size: 12px;
     font-weight: bold;
 
+}
+
+/* For the container holding both lists */
+.container {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* For each list section */
+.item-list, .confirmed-items {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* For the checkbox group */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.checkbox-group label:hover {
+    background: #e9ecef;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin: 0;
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+}
+
+h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 0.5rem;
+}
+
+.student-info {
+    width: 100%;
+    max-width: 900px; /* Adjust as needed */
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* For date and time inputs to match height */
+input[type="date"],
+input[type="time"] {
+    height: 38px; /* Matches text input height */
 }

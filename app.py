@@ -8,12 +8,9 @@ url = "https://jkcvqfbdvcnuhzxqtwii.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprY3ZxZmJkdmNudWh6eHF0d2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NDgxODEsImV4cCI6MjA2MTIyNDE4MX0.M9HyWsUOTZY3HGTHX8BosizBfao09huIHFyF8NOKqRY"
 supabase: Client = create_client(url, key)
 
-# === Home Page Route ===
-@app.route("/")
-def index():
-    return render_template("Labconnect.html")
 
-# === Admin Dashboard ===
+
+# Admin Dashboard Route
 @app.route("/admin")
 def admin_dashboard():
     student_requests = supabase.table("student_requests").select("*").execute().data
@@ -73,14 +70,15 @@ def decline_request(request_id):
     supabase.table("student_requests").update({"status": "Declined"}).eq("request_id", request_id).execute()
     return redirect(url_for("professor_dashboard"))
 
-# === Static Pages ===
+# Routes for Static Pages
+@app.route("/")
+def labconnect():
+    return render_template("Labconnect.html")
+
 @app.route("/learnmore")
 def learnmore():
     return render_template("learnmore.html")
 
-@app.route("/login")
-def login():
-    return render_template("login.html")
 
 @app.route("/privacy-policy")
 def privacy_policy():
@@ -90,6 +88,24 @@ def privacy_policy():
 def terms_of_service():
     return render_template("terms-of-service.html")
 
-# === Run App ===
+# Routes for Student and Professor Pages
+@app.route('/student')
+def student():
+    return render_template('student.html')
+
+@app.route('/professor')
+def professor():
+    return render_template('professor.html')
+
+@app.route('/admin')
+def admin_dashboard():
+    return render_template('admin.html')
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+
+# Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)

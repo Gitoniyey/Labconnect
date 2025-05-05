@@ -27,6 +27,7 @@
             <div class="buttons">
                 <a href="#" class="btn" onclick="openModal('signup')">Get Started</a>
                 <a href="{{ url_for('login') }}" class="btn" onclick="openModal('signin')">Sign In</a>
+
             </div>
         </div>
     </section>
@@ -52,7 +53,7 @@
                     <button type="submit">Sign Up</button>
                 </form>
                 <p>Already have an account? <a href="#" onclick="toggleForms('signin')">Sign In</a></p>
-                <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+                <a href="{{ url_for('labconnect') }}" class="btn">Back to Home</a>
             </div>
 
             <!-- SIGN IN FORM -->
@@ -68,7 +69,7 @@
                     <button type="submit">Sign In</button>
                 </form>
                 <p>Don't have an account? <a href="#" onclick="toggleForms('signup')">Sign Up</a></p>
-                <a href="{{ url_for('index') }}" class="btn">Back to Home</a>
+                <a href="{{ url_for('labconnect') }}" class="btn">Back to Home</a>
             </div>
         </div>
     </div>

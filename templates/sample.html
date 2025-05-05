@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Request Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='student.css') }}">
+</head>
+<body>
+    <div id="notification" class="notification"></div>
+   
+    <header>
+        <div class="logo">
+            <img src="logolabconnect.png" alt="Logo">
+        </div>
+
+
+        <nav>
+            <a href="Labconnect.html">Home</a>
+            <a href="#request-form">Request Form</a>
+            <a href="#" id="notification-btn">Notifications</a>
+            <div class="profile-container">
+                <div class="profile-icon" id="profile-icon">SR</div>
+                <div class="profile-dropdown" id="profile-dropdown">
+                    <ul>
+                        <li id="logout-btn">Logout</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+   
+   
+    <section id="request-form" class="request-form">
+        <h2>Request Form</h2>
+        <div class="form-container">
+            <div class="student-info">
+
+
+                <label>Name of Student:</label>
+                <input type="text" placeholder="Enter your Name">
+                <label>Subject:</label>
+                <input type="text" placeholder="Enter your Course">
+
+
+                <label>Student Number:</label>
+                <input type="text" placeholder="Enter student number">
+               
+                <label>Laboratory:</label>
+                <input type="text" placeholder="Enter Subject">
+               
+                <label>Date Filed:</label>
+                <input type="date">
+               
+                <label>Time Needed:</label>
+                <input type="time">
+               
+            </div>
+        </div>
+       
+    <div class="container">
+        <div class="item-list">
+            <h3>ITEM</h3>
+            <label><input type="checkbox" data-item="Huion Kamvas Pro 16"> Huion Kamvas Pro 16 Interactive Pen</label>
+            <label><input type="checkbox" data-item="DC Power Supply"> DC Power Supply 127V (0-12V)</label>
+            <label><input type="checkbox" data-item="Digital Multimeter"> Digital Multimeter (Alexan AC650)</label>
+            <label><input type="checkbox" data-item="Analog Multitester"> Analog Multitester (SANWA YX360TRF)</label>
+            <label><input type="checkbox" data-item="AC Panel Meter"> AC Panel Meter (300V); Unix</label>
+            <label><input type="checkbox" data-item="LAN Tester"> LAN Tester RJ45/RJ11; Generic</label>
+        </div>
+        <div class="confirmed-items">
+            <h3>CONFIRMED ITEM</h3>
+            </div>
+        </div>
+    </div>
+   
+   
+    <button class="send-approval">SEND APPROVAL</button>
+
+
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="#"><img src="facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
+            <a href="#"><img src="instagram.png" alt="LinkedIn"></a>
+        </div>
+        <div>
+        <p>© 2025 Jose Rizal University. All Rights Reserved.</p>
+        <nav>
+            <a href="{{ url_for('terms_of_service') }}" class="btn">Terms of Use</a>
+            <a href="{{ url_for('privacy_policy') }}" class="btn">Privacy Policy</a>
+        </nav>
+    </div>
+    </footer>
+   
+    <script src="{{ url_for('static', filename='student.js') }}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!--LOG IN HTML-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to LabConnect</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <h1>Welcome to LabConnect</h1>
+            <div class="user-type-selector">
+                <button class="user-type-btn active" data-type="student">Student</button>
+                <button class="user-type-btn" data-type="professor">Professor</button>
+                <button class="user-type-btn" data-type="admin">Admin</button>
+            </div>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="button" class="login-btn" onclick="window.location.href='{{ url_for('student') }}'">Login</button>
+
+            </form>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+                <a href="{{ url_for('labconnect') }}" class="btn">Back to Home</a>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+</body>
+</html>
