@@ -11,7 +11,7 @@ supabase: Client = create_client(url, key)
 
 
 # Admin Dashboard Route
-@app.route("/admin")
+@app.route("/admin/dashboard")
 def admin_dashboard():
     student_requests = supabase.table("student_requests").select("*").execute().data
     return render_template("admin_dashboard.html", student_requests=student_requests)
@@ -98,7 +98,7 @@ def professor():
     return render_template('professor.html')
 
 @app.route('/admin')
-def admin_dashboard():
+def admin():
     return render_template('admin.html')
 
 @app.route("/login")
