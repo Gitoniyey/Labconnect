@@ -88,45 +88,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle send approval button
     const sendApprovalBtn = document.querySelector('.send-approval');
+    
     if (sendApprovalBtn) {
-      sendApprovalBtn.addEventListener('click', async () => {
-        // Collect inputs
-        const name    = document.querySelector('input[placeholder="Enter your Name"]')?.value || "";
-        const course  = document.querySelector('input[placeholder="Enter your Course"]')?.value || "";
-        const number  = document.querySelector('input[placeholder="Enter student number"]')?.value || "";
-        const lab     = document.querySelector('input[placeholder="Enter Subject"]')?.value || "";
-        const date    = document.querySelector('input[type="date"]')?.value || "";
-        const time    = document.querySelector('input[type="time"]')?.value || "";
-        const items   = Array.from(document.querySelectorAll('.confirmed-item')).map(item => ({
-          name: item.dataset.item,
-          quantity: parseInt(item.querySelector('.quantity')?.textContent) || 1
-        }));
-  
-        const payload = {
-          student_name:  name,
-          student_number: number,
-          subject:        lab,
-          course:         course,
-          laboratory:     lab,
-          date_filed:     date,
-          time_needed:    time,
-          items:          items,
-          status:         "pending"
-        };
-  
-        try {
-          const res = await fetch('/student/submit-request', {
-            method:  'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify(payload)
-          });
-          if (!res.ok) throw new Error(`Server returned ${res.status}`);
-          alert('Request submitted successfully!');
-        } catch (err) {
-          console.error(err);
-          alert('Error submitting request.');
-        }
-      });
+        sendApprovalBtn.addEventListener('click', function() {
+            // Get all the input fields
+            const nameInput = document.querySelector('input[placeholder="Enter your Name"]');
+            const subjectInput = document.querySelector('input[placeholder="Enter your Course"]');
+            const numberInput = document.querySelector('input[placeholder="Enter student number"]');
+            const labInput = document.querySelector('input[placeholder="Enter Subject"]');
+            const dateInput = document.querySelector('input[type="date"]');
+            const timeInput = document.querySelector('input[type="time"]');
+            
+            // Get all confirmed items
+            const confirmedItems = document.querySelectorAll('.confirmed-item');
+            const selectedItems = [];
+            
+            confirmedItems.forEach(item => {
+                const itemName = item.dataset.item;
+                const quantityElement = item.querySelector('.quantity');
+                const quantity = quantityElement ? parseInt(quantityElement.textContent) : 1;
+                
+                selectedItems.push({
+                    name: itemName,
+                    quantity: quantity
+                });
+            });
+            
+            // Create request data object with all collected information
+            const requestData = {
+                studentName: nameInput ? nameInput.value : "",
+                subject: subjectInput ? subjectInput.value : "",
+                studentNumber: numberInput ? numberInput.value : "",
+                laboratory: labInput ? labInput.value : "",
+                dateFiled: dateInput ? dateInput.value : "",
+                timeNeeded: timeInput ? timeInput.value : "",
+                items: selectedItems,
+                status: "pending",
+                timestamp: new Date().getTime()
+            };
+            
+            console.log("Saving request data:", requestData);
+            
+            // Save to localStorage with a consistent key name
+            localStorage.setItem("labEquipmentRequest", JSON.stringify(requestData));
+            
+            // Show notification
+            showNotification("Request sent for approval!");
+            
+            // Add to notifications
+            addNotification("Your equipment request has been sent for approval.", "info");
+            
+            alert("Request submitted successfully!");
+        });
     }
 
     // Other UI functionality
@@ -368,4 +381,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initial check for request status
     checkRequestStatus();
+});
+
+const sendApprovalBtn = document.querySelector('.send-approval');
+if (sendApprovalBtn) {
+  sendApprovalBtn.addEventListener('click', async () => {
+    // Collect inputs
+    const name    = document.querySelector('input[placeholder="Enter your Name"]')?.value || "";
+    const course  = document.querySelector('input[placeholder="Enter your Course"]')?.value || "";
+    const number  = document.querySelector('input[placeholder="Enter student number"]')?.value || "";
+    const lab     = document.querySelector('input[placeholder="Enter Subject"]')?.value || "";
+    const date    = document.querySelector('input[type="date"]')?.value || "";
+    const time    = document.querySelector('input[type="time"]')?.value || "";
+    const items   = Array.from(document.querySelectorAll('.confirmed-item')).map(item => ({
+      name: item.dataset.item,
+      quantity: parseInt(item.querySelector('.quantity')?.textContent) || 1
+    }));
+
+    const payload = {
+      student_name:  name,
+      student_number: number,
+      subject:        lab,
+      course:         course,
+      laboratory:     lab,
+      date_filed:     date,
+      time_needed:    time,
+      items:          items,
+      status:         "pending"
+    };
+
+    try {
+      const res = await fetch('/student/submit-request', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      alert('Request submitted successfully!');
+    } catch (err) {
+      console.error(err);
+      alert('Error submitting request.');
+    }
+  });
+}
+
+fetch('/api/inventory')
+.then(response => response.json())
+.then(data => {
+  console.log("Inventory Data:", data);
+  // You can now dynamically render it into your HTML
+})
+.catch(error => {
+  console.error('Error fetching inventory:', error);
 });

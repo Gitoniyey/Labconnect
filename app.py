@@ -1,6 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, jsonify, render_template, request, redirect, url_for
 from supabase import create_client, Client
+from datetime import datetime
 from postgrest import APIError
+
 
 app = Flask(__name__)
 
@@ -8,7 +10,6 @@ app = Flask(__name__)
 url = "https://jkcvqfbdvcnuhzxqtwii.supabase.co"
 key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprY3ZxZmJkdmNudWh6eHF0d2lpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2NDgxODEsImV4cCI6MjA2MTIyNDE4MX0.M9HyWsUOTZY3HGTHX8BosizBfao09huIHFyF8NOKqRY"
 supabase: Client = create_client(url, key)
-
 
 
 # Admin Dashboard Route
@@ -34,6 +35,7 @@ def update_inventory():
     # Placeholder for logic
     return redirect(url_for("admin_dashboard"))
 
+
 # === Student Dashboard ===
 @app.route("/student/dashboard")
 def student_dashboard():
@@ -41,55 +43,56 @@ def student_dashboard():
     student_requests = supabase.table("student_requests").select("*").eq("student_id", student_id).execute().data
     return render_template("student_dashboard.html", student_requests=student_requests)
 
-
-
+    
 @app.route("/student/submit-request", methods=["POST"])
 def submit_request():
     data = request.get_json() or {}
-    items = data.get("items", [])
 
-    # 1) Insert main row inside try/except
-    try:
-        main_resp = supabase.table("student_requests") \
-            .insert({
-                "student_name":   data.get("student_name", ""),
-                "student_number": data.get("student_number", ""),
-                "subject":        data.get("subject", ""),
-                "course":         data.get("course", ""),
-                "laboratory":     data.get("laboratory", ""),
-                "date_filed":     data.get("date_filed", ""),
-                "time_needed":    data.get("time_needed", ""),
-                "status":         data.get("status", "pending")
-            }).execute()
-    except APIError as err:
-        return jsonify({"error": err.message}), 400
+    # Extract request fields
+    student_name   = data.get("student_name", "")
+    student_number = data.get("student_number", "")
+    subject        = data.get("subject", "")
+    course         = data.get("course", "")
+    laboratory     = data.get("laboratory", "")
+    date_filed     = data.get("date_filed", "")
+    time_needed    = data.get("time_needed", "")
+    status         = data.get("status", "Pending")
+    items          = data.get("items", [])  # items = list of dicts like {item_name, inventory_item_id}
 
-    # 2) Grab the generated request_id
-    request_id = main_resp.data[0].get("request_id")
-    if not request_id:
-        return jsonify({"error": "Failed to retrieve request_id"}), 500
+    # 1. Insert the main student request
+    response = supabase.table("student_requests").insert({
+        "student_name": student_name,
+        "student_number": student_number,
+        "subject": subject,
+        "course": course,
+        "laboratory": laboratory,
+        "date_filed": date_filed,
+        "time_needed": time_needed,
+        "status": status
+    }).execute()
 
-    # 3) Insert each item
-    inserted_items = []
+    if response.error:
+        return jsonify({"error": response.error.message}), 400
+
+    # 2. Get the new request_id
+    request_id = response.data[0]["request_id"]
+
+    # 3. Insert each item into request_items
+    request_items = []
     for item in items:
-        try:
-            item_resp = supabase.table("request_items") \
-                .insert({
-                    "request_id":        request_id,
-                    "item_name":         item.get("name"),
-                    "confirmed":         item.get("confirmed", False),
-                    "inventory_item_id": item.get("inventory_item_id")
-                }).execute()
-            inserted_items.append(item_resp.data[0])
-        except APIError:
-            # Optionally log or handle partial failures
-            continue
+        request_items.append({
+            "request_id": request_id,
+            "item_name": item.get("item_name", ""),
+            "inventory_item_id": item.get("inventory_item_id")  # this should match the FK in request_items
+        })
 
-    return jsonify({
-        "success": True,
-        "request": main_resp.data[0],
-        "items":   inserted_items
-    }), 200
+    if request_items:
+        item_response = supabase.table("request_items").insert(request_items).execute()
+        if item_response.error:
+            return jsonify({"error": item_response.error.message}), 400
+
+    return jsonify({"message": "Request submitted successfully"}), 200
+
 
 # === Professor Dashboard ===
 @app.route("/professor/dashboard")
@@ -126,10 +129,19 @@ def privacy_policy():
 def terms_of_service():
     return render_template("terms-of-service.html")
 
-# Routes for Student and Professor Pages
 @app.route('/student')
 def student():
-    return render_template('student.html')
+    # Query the inventory_items table
+    response = supabase.table('inventory_items').select("*").execute()
+
+    # Check for errors in the response
+    if response.error:
+        return f"Error fetching data: {response.error}", 500
+    
+    # If there's no error, process the data
+    items = response.data  # This contains the data from the table
+    return render_template('Student.html', inventory=items)
+
 
 @app.route('/professor')
 def professor():
