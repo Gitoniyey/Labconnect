@@ -1,4 +1,3 @@
-/* General Reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,22 +5,19 @@
     font-family: Arial, sans-serif;
 }
 
-
 body {
-    background: url('ganda.nito.jpg') no-repeat center center fixed;
+    background: url('/static/Images/ganda.nito.jpg') no-repeat center center fixed;
     padding: 20px;
 }
-
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent; /* Make the header background transparent */
+    background: transparent; 
     padding: 10px 20px;
     color: white;
 }
-
 
 .logo img {
     height: 50px;
@@ -59,11 +55,9 @@ nav .login-btn {
     overflow-y: auto;
 }
 
-
 .notification-container.active {
     display: block;
 }
-
 
 .notification-container h3 {
     text-align: left;
@@ -71,27 +65,23 @@ nav .login-btn {
     color: #333;
 }
 
-
 .notification-container ul {
     list-style-type: none;
     padding: 0;
 }
-
 
 .notification-container ul li {
     padding: 5px;
     border-bottom: 1px solid #ccc;
 }
 
-
 .notification-container ul li:last-child {
     border-bottom: none;
 }
 
-
 /* Form Layout */
 .request-form {
-    background: white;
+    background: linear-gradient(to right, #4c00ff, #ff5722);;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -100,25 +90,25 @@ nav .login-btn {
     max-width: 925px;
 }
 
-
 h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #ff5722;
+    color: white;
 }
-
 
 .form-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background: white; 
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 
 label {
     font-weight: bold;
 }
-
 
 input, select {
     width: 35%;
@@ -128,9 +118,6 @@ input, select {
     border-radius: 10px;
 }
 
-
-
-
 .container {
     display: flex;
     justify-content: space-between;
@@ -138,32 +125,26 @@ input, select {
     margin-top: 20px;
 }
 
-
-.item-list, .confirmed-items {
+.item-list {
     width: 48%;
-    background-color: #ffb300; /* The darker yellow/amber color you specified */
-    color: black; /* Make text readable on the amber background */
+    background:  rgb(248, 189, 63);
+    color: black; 
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
-
-.item-list label, .confirmed-items div {
+.confirmed-items div {
     display: flex;
     align-items: left;
     justify-content: space-between;
     padding: 5px 0;
-    color: black; /* Ensure text inside these elements is also black */
-
+    color: black;
+    background: rgb(248, 189, 63);
 }
-
 
 .item-list input[type="checkbox"] {
     margin-right: 50px;
-
 }
-
 
 .quantity-controls {
     display: flex;
@@ -173,28 +154,20 @@ input, select {
     width: 100px;
 }
 
-
 .quantity-controls button {
     padding: 5px 10px;
     border: none;
-    background: #e69900; /* A slightly darker shade for button */
-    color: black;
+    background: #4c00ff;
+    color: white;
     cursor: pointer;
     border-radius: 5px;
 }
 
-
-.quantity-controls button:hover {
-    background: #e69900;
-}
-
-
 h3 {
     text-align: center;
     margin-bottom: 10px;
-    color: black; /* Make the heading text black */
+    color: black; 
 }
-
 
 .send-approval {
     display: block;
@@ -209,11 +182,9 @@ h3 {
     transition: background 0.3s;
 }
 
-
 .send-approval:hover {
     background: #ff5722;
 }
-
 
 .send-approval:active {
     background: #1e7e34;
@@ -231,12 +202,10 @@ h3 {
     z-index: 1000;
 }
 
-
 .notification.show {
     display: block;
     animation: fadeOut 3s forwards;
 }
-
 
 @keyframes fadeOut {
     0% { opacity: 1; }
@@ -256,7 +225,6 @@ h3 {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-
 /* Notification Count */
 .notification-count {
     position: absolute;
@@ -268,7 +236,6 @@ h3 {
     padding: 3px 6px;
     border-radius: 50%;
 }
-
 
 #notification-panel {
     position: absolute;
@@ -283,19 +250,16 @@ h3 {
     display: none;
 }
 
-
 #notification-panel h4 {
     text-align: center;
     margin-bottom: 10px;
     color: #0056b3;
 }
 
-
 #notification-list {
     list-style: none;
     padding: 0;
 }
-
 
 #notification-list li {
     padding: 8px;
@@ -303,18 +267,15 @@ h3 {
     font-size: 14px;
 }
 
-
 .hidden {
     display: none;
 }
-
 
 /* Profile Icon */
 .profile-container {
     position: relative;
     display: inline-block;
 }
-
 
 .profile-icon {
     width: 40px;
@@ -330,7 +291,6 @@ h3 {
     position: relative;
 }
 
-
 /* Profile Dropdown */
 .profile-dropdown {
     display: none;
@@ -345,11 +305,9 @@ h3 {
     z-index: 1000;
 }
 
-
 .profile-dropdown.active {
     display: block;
 }
-
 
 .profile-dropdown ul {
     list-style: none;
@@ -357,23 +315,19 @@ h3 {
     margin: 0;
 }
 
-
 .profile-dropdown ul li {
     padding: 10px;
     border-bottom: 1px solid #000000;
     cursor: pointer;
 }
 
-
 .profile-dropdown ul li:last-child {
     border-bottom: none;
 }
 
-
 .profile-dropdown ul li:hover {
     background: #ffffff;
 }
-
 
 /* Navigation Menu */
 .nav-menu {
@@ -384,7 +338,6 @@ h3 {
     gap: 15px;
 }
 
-
 .nav-menu li {
     padding: 10px 15px;
     background: #007bff;
@@ -393,69 +346,9 @@ h3 {
     cursor: pointer;
 }
 
-
-.nav-menu li:hover {
-    background: #0056b3;
-}
-/* Default Light Mode */
-:root {
-    --bg-color: #f4f4f4;
-    --text-color: #333;
-    --header-bg: transparent; /* Set default header background to transparent */
-    --nav-bg: #007bff;
-    --btn-bg: #ffcc00;
-}
-
-
-/* Dark Mode */
-.dark-mode {
-    --bg-color: #000000;
-    --text-color: #f4f4f4;
-    --header-bg: transparent; /* Set dark mode header background to transparent */
-    --nav-bg: #444;
-    --btn-bg: #ff9800;
-}
-
-
-/* Apply Variables */
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: 0.3s ease-in-out;
-}
-
-
-header {
-    background-color: var(--header-bg); /* Use the variable for header background */
-}
-
-
-.nav-menu li {
-    background: var(--nav-bg);
-}
-
-
-.nav-menu li:hover {
-    background: #0056b3;
-}
-
-
-button#theme-toggle {
-    padding: 5px 10px;
-    background: var(--btn-bg);
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-
-button#theme-toggle:hover {
-    background: #ffb300;
-}
 /* Footer Styles */
 .footer {
-    background-color: #ffb300; /* Dark blue background */
+    background: white;
     color: #000000;
     text-align: center;
     padding: 20px 0;
@@ -465,12 +358,10 @@ button#theme-toggle:hover {
     width: 100%;
 }
 
-
 /* Social Icons */
 .social-icons {
     margin-bottom: 10px;
 }
-
 
 .social-icons a {
     display: inline-block;
@@ -478,25 +369,21 @@ button#theme-toggle:hover {
     transition: transform 0.3s ease-in-out;
 }
 
-
 .social-icons a:hover {
     transform: scale(1.1);
 }
-
 
 /* Social Icon Images */
 .social-icons img {
     width: 30px;
     height: 30px;
-    filter: none; /* Makes icons white */
+    filter: none; 
 }
-
 
 /* Footer Navigation Links */
 .footer nav {
     margin-top: 10px;
 }
-
 
 .footer nav a {
     color: #000000;
@@ -506,11 +393,9 @@ button#theme-toggle:hover {
     transition: color 0.3s ease-in-out;
 }
 
-
 .footer nav a:hover {
-    color: #15085c; /* Highlight color when hovered */
+    color: #15085c; 
 }
-
 
 /* Responsive Footer */
 @media (max-width: 600px) {
@@ -645,20 +530,23 @@ button#theme-toggle:hover {
 
 }
 
-/* For the container holding both lists */
-.container {
-    display: flex;
-    gap: 2rem;
-    padding: 1rem;
+/* For each list section */
+.item-list {
+flex: 1;
+background: white;
+padding: 1rem;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+text-align: left;
 }
 
-/* For each list section */
-.item-list, .confirmed-items {
+.confirmed-items {
     flex: 1;
-    background: #f8f9fa;
+    background: rgb(248, 189, 63);
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: left;
 }
 
 /* For the checkbox group */
@@ -666,6 +554,7 @@ button#theme-toggle:hover {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
+
 }
 
 .checkbox-group label {
@@ -691,9 +580,10 @@ button#theme-toggle:hover {
 
 h3 {
     margin-bottom: 1rem;
-    color: #333;
+    color: black;
     border-bottom: 2px solid #ddd;
     padding-bottom: 0.5rem;
+    background: white;
 }
 
 .student-info {
@@ -726,10 +616,19 @@ input {
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
+    background: white;
 }
 
 /* For date and time inputs to match height */
 input[type="date"],
 input[type="time"] {
     height: 38px; /* Matches text input height */
+}
+
+/* Styling for student's name */
+.student-name {
+    background-color: rgb(248, 189, 63); /* Apply the container color */
+    color: black; /* Make sure the text is readable */
+    padding: 10px;
+    border-radius: 5px;
 }

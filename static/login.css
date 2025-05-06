@@ -6,7 +6,7 @@
 }
 
 body {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+    background: url('/static/Images/ganda.nito.jpg') no-repeat center center fixed;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@ h1 {
 }
 
 .user-type-btn.active {
-    background: #ff6b6b;
+    background: linear-gradient(to right, #4c00ff, #ff5722);
     color: white;
 }
 
@@ -86,7 +86,7 @@ input:focus {
 .login-btn {
     width: 100%;
     padding: 12px;
-    background: #ff6b6b;
+    background: linear-gradient(to right, #4c00ff, #ff5722);
     color: white;
     border: none;
     border-radius: 5px;
@@ -96,7 +96,7 @@ input:focus {
 }
 
 .login-btn:hover {
-    background: #ff8e8e;
+    background: #ff5722;
 }
 
 .forgot-password {
@@ -105,7 +105,7 @@ input:focus {
 }
 
 .forgot-password a {
-    color: #ff6b6b;
+    color: #ff5722;
     text-decoration: none;
     font-size: 0.9rem;
 }

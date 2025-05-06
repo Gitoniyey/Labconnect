@@ -11,12 +11,12 @@
    
     <header>
         <div class="logo">
-            <img src="logolabconnect.png" alt="Logo">
+            <img src="{{ url_for('static', filename='images/logolabconnect.png') }}" alt="Logo">
         </div>
 
 
         <nav>
-            <a href="Labconnect.html">Home</a>
+            <a href="{{ url_for('labconnect') }}">Home</a>
             <a href="#request-form">Request Form</a>
             <a href="#" id="notification-btn">Notifications</a>
             <div class="profile-container">
@@ -94,10 +94,10 @@
 
     <footer class="footer">
         <div class="social-icons">
-            <a href="#"><img src="facebook.png.png" alt="Facebook"></a>
-            <a href="#"><img src="twitter.png.png" alt="Twitter"></a>
-            <a href="#"><img src="linkedin.png" alt="LinkedIn"></a>
-            <a href="#"><img src="instagram.png.png" alt="LinkedIn"></a>
+            <a href="#"><img src="{{ url_for('static', filename='images/facebook.png') }}" alt="Facebook"></a>
+            <a href="#"><img src="{{ url_for('static', filename='images/twitter.png') }}" alt="Twitter"></a>
+            <a href="#"><img src="{{ url_for('static', filename='images/linkedin.png') }}" alt="LinkedIn"></a>
+            <a href="#"><img src="{{ url_for('static', filename='images/instagram.png') }}" alt="Instagram"></a>
         </div>
         <div>
         <p>© 2025 Jose Rizal University. All Rights Reserved.</p>
