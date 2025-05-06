@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from supabase import create_client, Client
+from postgrest import APIError
 
 app = Flask(__name__)
 
@@ -45,44 +46,50 @@ def student_dashboard():
 @app.route("/student/submit-request", methods=["POST"])
 def submit_request():
     data = request.get_json() or {}
-    # Extract fields, with defaults or simple validation
-    student_name   = data.get("student_name", "")
-    student_number = data.get("student_number", "")
-    subject        = data.get("subject", "")
-    course         = data.get("course", "")
-    laboratory     = data.get("laboratory", "")
-    date_filed     = data.get("date_filed", "")
-    time_needed    = data.get("time_needed", "")
-    status         = data.get("status", "pending")
-    items          = data.get("items", [])
+    items = data.get("items", [])
 
-    # Insert main request row
-    response = supabase.table("student_requests").insert({
-        "student_name":   student_name,
-        "student_number": student_number,
-        "subject":        subject,
-        "course":         course,
-        "laboratory":     laboratory,
-        "date_filed":     date_filed,
-        "time_needed":    time_needed,
-        "status":         status
-    }).execute()
+    # 1) Insert main row inside try/except
+    try:
+        main_resp = supabase.table("student_requests") \
+            .insert({
+                "student_name":   data.get("student_name", ""),
+                "student_number": data.get("student_number", ""),
+                "subject":        data.get("subject", ""),
+                "course":         data.get("course", ""),
+                "laboratory":     data.get("laboratory", ""),
+                "date_filed":     data.get("date_filed", ""),
+                "time_needed":    data.get("time_needed", ""),
+                "status":         data.get("status", "pending")
+            }).execute()
+    except APIError as err:
+        return jsonify({"error": err.message}), 400
 
-    if response.error:
-        return jsonify({"error": response.error.message}), 400
+    # 2) Grab the generated request_id
+    request_id = main_resp.data[0].get("request_id")
+    if not request_id:
+        return jsonify({"error": "Failed to retrieve request_id"}), 500
 
-    # If you also need to store the items in another table, you can do it here:
-    # request_id = response.data[0]["request_id"]
-    # for item in items:
-    #     supabase.table("request_items").insert({
-    #         "request_id": request_id,
-    #         "item_name":  item["name"],
-    #         "quantity":   item["quantity"]
-    #     }).execute()
+    # 3) Insert each item
+    inserted_items = []
+    for item in items:
+        try:
+            item_resp = supabase.table("request_items") \
+                .insert({
+                    "request_id":        request_id,
+                    "item_name":         item.get("name"),
+                    "confirmed":         item.get("confirmed", False),
+                    "inventory_item_id": item.get("inventory_item_id")
+                }).execute()
+            inserted_items.append(item_resp.data[0])
+        except APIError:
+            # Optionally log or handle partial failures
+            continue
 
-    # Redirect or return JSON
-    return jsonify({"success": True, "data": response.data}), 200
-
+    return jsonify({
+        "success": True,
+        "request": main_resp.data[0],
+        "items":   inserted_items
+    }), 200
 
 # === Professor Dashboard ===
 @app.route("/professor/dashboard")
