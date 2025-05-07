@@ -131,16 +131,12 @@ def terms_of_service():
 
 @app.route('/student')
 def student():
-    # Query the inventory_items table
-    response = supabase.table('inventory_items').select("*").execute()
-
-    # Check for errors in the response
-    if response.error:
-        return f"Error fetching data: {response.error}", 500
-    
-    # If there's no error, process the data
-    items = response.data  # This contains the data from the table
-    return render_template('Student.html', inventory=items)
+    try:
+        response = supabase.table('inventory_items').select("*").execute()
+        items = response.data  # Get the data from the response
+        return render_template('Student.html', inventory=items)
+    except Exception as e:
+        return f"Error fetching data: {str(e)}", 500
 
 
 @app.route('/professor')
