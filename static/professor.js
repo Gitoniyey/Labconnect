@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Load confirmed requests
     loadConfirmedRequests();
+
+    // Add dropdown and logout event listeners
+    setupDropdown();
 });
 
 // Load the student request data from localStorage
@@ -102,6 +105,28 @@ function displayRequestedItems(items) {
     });
     
     console.log(`Displayed ${items.length} requested items`);
+}
+
+
+
+function displayRequestedItems(items) {
+    const tableBody = document.getElementById('equipment-list-body');
+    if (!tableBody) return;
+    
+    tableBody.innerHTML = '';
+    
+    items.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <input type="checkbox" checked disabled>
+                ${item.name}
+            </td>
+            <td>${item.quantity}</td>
+          
+        `;
+        tableBody.appendChild(row);
+    });
 }
 
 // Set up event handlers for buttons
@@ -367,6 +392,8 @@ function viewRequest(requestId) {
         alert("Request data not found or no longer available.");
         return;
     }
+
+    
     
     // Switch to request form section
     showSection('request-form');
@@ -378,37 +405,16 @@ function viewRequest(requestId) {
     const studentNumberInput = document.querySelector('input[name="studentNumber"]');
     const dateFiledInput = document.querySelector('input[name="dateFiled"]');
     const timeNeededInput = document.querySelector('input[name="timeNeeded"]');
+    const subjectInput = document.querySelector('input[name="subject"]');
     
-    // Temporarily remove readonly to set values
-    if (nameInput) {
-        nameInput.removeAttribute('readonly');
-        nameInput.value = requestData.studentName || "";
-        nameInput.setAttribute('readonly', 'readonly');
-    }
-    
-    if (labInput) {
-        labInput.removeAttribute('readonly');
-        labInput.value = requestData.laboratory || "";
-        labInput.setAttribute('readonly', 'readonly');
-    }
-    
-    if (studentNumberInput) {
-        studentNumberInput.removeAttribute('readonly');
-        studentNumberInput.value = requestData.studentNumber || "";
-        studentNumberInput.setAttribute('readonly', 'readonly');
-    }
-    
-    if (dateFiledInput) {
-        dateFiledInput.removeAttribute('readonly');
-        dateFiledInput.value = requestData.dateFiled || "";
-        dateFiledInput.setAttribute('readonly', 'readonly');
-    }
-    
-    if (timeNeededInput) {
-        timeNeededInput.removeAttribute('readonly');
-        timeNeededInput.value = requestData.timeNeeded || "";
-        timeNeededInput.setAttribute('readonly', 'readonly');
-    }
+
+   // Set form values (ADDED SUBJECT)
+   if (nameInput) nameInput.value = requestData.studentName || "";
+   if (labInput) labInput.value = requestData.laboratory || "";
+   if (studentNumberInput) studentNumberInput.value = requestData.studentNumber || "";
+   if (dateFiledInput) dateFiledInput.value = requestData.dateFiled || "";
+   if (timeNeededInput) timeNeededInput.value = requestData.timeNeeded || "";
+   if (subjectInput) subjectInput.value = requestData.subject || "";
     
     // Display the requested items
     displayRequestedItems(requestData.items);
@@ -448,6 +454,7 @@ function updateButtonStates(status) {
         declineBtn.classList.remove('disabled');
         declineBtn.textContent = 'DECLINE';
     }
+    
 }
 
 // Toggle read status of a notification
@@ -483,3 +490,63 @@ function checkForNewRequests() {
         }
     }
 }
+
+// Dropdown functionality
+function toggleDropdown() {
+    const dropdown = document.getElementById("dropdown-menu");
+    if (dropdown) {
+        dropdown.classList.toggle("hidden");
+    }
+}
+
+function logout() {
+    // Redirect to login page or perform logout logic
+    window.location.href = "login.html"; // Adjust this as needed
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    const profileSection = document.querySelector('.profile-section');
+    const dropdown = document.getElementById('dropdown-menu');
+
+    if (dropdown && profileSection && !profileSection.contains(event.target)) {
+        dropdown.classList.add('hidden');
+    }
+});
+
+// Optional: Close dropdown with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const dropdown = document.getElementById('dropdown-menu');
+        if (dropdown && !dropdown.classList.contains('hidden')) {
+            dropdown.classList.add('hidden');
+        }
+    }
+});
+
+// Function to set up dropdown
+function setupDropdown() {
+    const profileIcon = document.getElementById('profile-icon');
+    const dropdown = document.getElementById('profile-dropdown');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (!profileIcon || !dropdown || !logoutBtn) return;
+
+    profileIcon.addEventListener('click', function () {
+        dropdown.classList.toggle('hidden');
+    });
+
+    logoutBtn.addEventListener('click', function () {
+        // Handle logout logic here
+        localStorage.clear();
+        window.location.href = '/login'; 
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+}
+
