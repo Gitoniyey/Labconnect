@@ -61,11 +61,18 @@ def delete_inventory(item_id):
 # === Student Dashboard ===
 @app.route("/student/dashboard")
 def student_dashboard():
-    student_id = "example_student_id"  # Replace with real student ID if using login/session
-    student_requests = supabase.table("student_requests").select("*").eq("student_id", student_id).execute().data
+    student_id = "example_student_id"  # Replace with real student ID
+    student_requests = (
+    supabase
+    .table("student_requests")
+    .select("*, request_items(*)")
+    .eq("student_id", student_id)
+    .execute()
+    .data
+)
     return render_template("student_dashboard.html", student_requests=student_requests)
 
-    
+
 @app.route("/student/submit-request", methods=["POST"])
 def submit_request():
     data = request.get_json() or {}
@@ -79,9 +86,9 @@ def submit_request():
     date_filed     = data.get("date_filed", "")
     time_needed    = data.get("time_needed", "")
     status         = data.get("status", "Pending")
-    items          = data.get("items", [])  # items = list of dicts like {item_name, inventory_item_id}
+    items          = data.get("items", [])  # list of dicts
 
-    # 1. Insert the main student request
+    # Insert main request
     response = supabase.table("student_requests").insert({
         "student_name": student_name,
         "student_number": student_number,
@@ -90,22 +97,22 @@ def submit_request():
         "laboratory": laboratory,
         "date_filed": date_filed,
         "time_needed": time_needed,
-        "status": status
+        "status": status,
+        "student_id": "example_student_id"  # must match filter in dashboard
     }).execute()
 
     if response.error:
         return jsonify({"error": response.error.message}), 400
 
-    # 2. Get the new request_id
     request_id = response.data[0]["request_id"]
 
-    # 3. Insert each item into request_items
+    # Insert items
     request_items = []
     for item in items:
         request_items.append({
             "request_id": request_id,
             "item_name": item.get("item_name", ""),
-            "inventory_item_id": item.get("inventory_item_id")  # this should match the FK in request_items
+            "inventory_item_id": item.get("inventory_item_id")
         })
 
     if request_items:
