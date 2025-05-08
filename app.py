@@ -4,6 +4,7 @@ from datetime import datetime
 from postgrest import APIError
 
 
+
 app = Flask(__name__)
 
 # Supabase connection details
