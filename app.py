@@ -12,29 +12,45 @@ key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Impr
 supabase: Client = create_client(url, key)
 
 
-# Admin Dashboard Route
 @app.route("/admin/dashboard")
 def admin_dashboard():
     student_requests = supabase.table("student_requests").select("*").execute().data
-    return render_template("admin_dashboard.html", student_requests=student_requests)
-
-@app.route("/admin/update-status", methods=["POST"])
-def update_status():
-    request_id = request.form.get("request_id")
-    action = request.form.get("action")
-    new_status = "Approved" if action == "approve" else "Declined"
-    supabase.table("student_requests").update({
-        "status": new_status
-    }).eq("request_id", request_id).execute()
-    return redirect(url_for("admin_dashboard"))
+    inventory_items = supabase.table("inventory_items").select("*").execute().data
+    return render_template("admin_dashboard.html", 
+                         student_requests=student_requests, 
+                         inventory_items=inventory_items)
 
 @app.route("/admin/update-inventory", methods=["POST"])
 def update_inventory():
     item_id = request.form.get("item_id")
-    action = request.form.get("action")
-    # Placeholder for logic
+    updates = {
+        "name": request.form.get("name"),
+        "quantity": request.form.get("quantity"),
+        "price": request.form.get("price"),
+        "category": request.form.get("category")
+    }
+    
+    # Update in Supabase
+    supabase.table("inventory_items").update(updates).eq("id", item_id).execute()
     return redirect(url_for("admin_dashboard"))
 
+@app.route("/admin/add-inventory", methods=["POST"])
+def add_inventory():
+    new_item = {
+        "name": request.form.get("name"),
+        "quantity": request.form.get("quantity"),
+        "price": request.form.get("price"),
+        "category": request.form.get("category")
+    }
+    
+    # Insert into Supabase
+    supabase.table("inventory_items").insert(new_item).execute()
+    return redirect(url_for("admin_dashboard"))
+
+@app.route("/admin/delete-inventory/<item_id>", methods=["POST"])
+def delete_inventory(item_id):
+    supabase.table("inventory_items").delete().eq("id", item_id).execute()
+    return redirect(url_for("admin_dashboard"))
 
 # === Student Dashboard ===
 @app.route("/student/dashboard")

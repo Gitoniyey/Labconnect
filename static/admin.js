@@ -892,3 +892,52 @@ document.querySelector('#equipment-table-body').addEventListener('click', (e) =>
 
 // Initialize equipment on page load
 loadEquipment();
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Section switching logic
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('nav a[data-section]');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const sectionId = this.getAttribute('data-section');
+            
+            // Update active nav link
+            navLinks.forEach(navLink => navLink.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show selected section
+            sections.forEach(section => {
+                section.classList.remove('active');
+                if (section.id === sectionId) {
+                    section.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // Form validation for equipment management
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            const inputs = this.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.style.borderColor = 'red';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields');
+            }
+        });
+    });
+});
