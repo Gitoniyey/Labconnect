@@ -1,27 +1,69 @@
 
-// Modified loadEquipment function
-function loadEquipment() {
-    let equipment = JSON.parse(localStorage.getItem(equipmentStorageKey));
+// Add this to your admin.js file
+document.addEventListener('DOMContentLoaded', function() {
+    // Show section based on navigation click
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (this.getAttribute('data-section')) {
+                e.preventDefault();
+                showSection(this.getAttribute('data-section'));
+            }
+        });
+    });
     
-    // Initialize with default equipment if empty
-    if (!equipment || equipment.length === 0) {
-        equipment = DEFAULT_EQUIPMENT;
-        localStorage.setItem(equipmentStorageKey, JSON.stringify(equipment));
-    }
+    // Load equipment data when the equipment section is shown
+    document.querySelector('a[data-section="equipment-management"]').addEventListener('click', loadEquipmentData);
     
-    const tbody = document.getElementById('equipment-table-body');
-    tbody.innerHTML = equipment.map(equip => `
-        <tr data-id="${equip.id}">
-            <td>${equip.name}</td>
-            <td>${equip.quantity}</td>
-            <td>${equip.laboratory}</td>
-            <td class="status-${equip.status}">${equip.status}</td>
-            <td>
-                <button class="edit-equipment">Edit</button>
-                <button class="delete-equipment">Delete</button>
-            </td>
-        </tr>
-    `).join('');
+    // Add equipment button functionality
+    document.getElementById('add-equipment-btn').addEventListener('click', function() {
+        // Implement add equipment functionality
+    });
+});
+
+function showSection(sectionId) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    // Show the selected section
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Update active class in navigation
+    document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === sectionId) {
+            link.classList.add('active');
+        }
+    });
+}
+
+function loadEquipmentData() {
+    fetch('/get_inventory_items')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('equipment-table-body');
+            tableBody.innerHTML = '';
+            
+            if (data.length === 0) {
+                const row = document.createElement('tr');
+                row.innerHTML = '<td colspan="4">No equipment items found</td>';
+                tableBody.appendChild(row);
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.item_description || 'N/A'}</td>
+                    <td>${item.item_quantity || 'N/A'}</td>
+                    <td>${item.lab_location || 'N/A'}</td>
+                    <td>${item.item_status || 'Available'}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error loading equipment data:', error));
 }
 
 

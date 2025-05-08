@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Flask==2.3.3
+=======
+Flask==2.3.3
+>>>>>>> c09c225d13a8804aa6c1f4bbe9b52de5f081bfe2
 supabase==1.0.3

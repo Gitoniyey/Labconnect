@@ -20,6 +20,11 @@ def admin_dashboard():
     return render_template("admin_dashboard.html", 
                          student_requests=student_requests, 
                          inventory_items=inventory_items)
+    
+@app.route("/get_inventory_items")
+def get_inventory_items():
+    inventory_items = supabase.table("inventory_items").select("*").execute().data
+    return jsonify(inventory_items)
 
 @app.route("/admin/update-inventory", methods=["POST"])
 def update_inventory():
